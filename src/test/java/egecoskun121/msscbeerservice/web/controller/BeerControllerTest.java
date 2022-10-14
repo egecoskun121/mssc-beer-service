@@ -2,8 +2,10 @@ package egecoskun121.msscbeerservice.web.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import egecoskun121.msscbeerservice.bootstrap.BeerLoader;
 import egecoskun121.msscbeerservice.domain.Beer;
 import egecoskun121.msscbeerservice.repositories.BeerRepository;
+import egecoskun121.msscbeerservice.services.BeerService;
 import egecoskun121.msscbeerservice.web.model.BeerDTO;
 import egecoskun121.msscbeerservice.web.model.BeerStyleEnum;
 import org.junit.jupiter.api.Test;
@@ -50,11 +52,11 @@ public class BeerControllerTest {
     ObjectMapper objectMapper;
 
     @MockBean
-    BeerRepository beerRepository;
+    BeerService beerService;
 
     @Test
     void getBeerById() throws Exception {
-        given(beerRepository.findById(any())).willReturn(Optional.of(Beer.builder().build()));
+        given(beerService.getById(any())).willReturn(getValidBeerDto());
 
         mockMvc.perform(get("/api/v1/beer/{beerId}",UUID.randomUUID().toString()).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
                 .andDo(document("v1/beer-get",pathParameters(
@@ -116,7 +118,7 @@ public class BeerControllerTest {
                 .beerName("My beer")
                 .beerStyle(BeerStyleEnum.ALE)
                 .price(new BigDecimal("2.99"))
-                .upc(1232133L)
+                .upc(BeerLoader.BEER_1_UPC)
                 .build();
     }
 
