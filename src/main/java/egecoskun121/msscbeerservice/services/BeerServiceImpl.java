@@ -5,7 +5,6 @@ import egecoskun121.msscbeerservice.repositories.BeerRepository;
 import egecoskun121.msscbeerservice.web.controller.NotFoundException;
 import egecoskun121.msscbeerservice.web.mapper.BeerMapper;
 import egecoskun121.msscbeerservice.web.model.BeerDTO;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
