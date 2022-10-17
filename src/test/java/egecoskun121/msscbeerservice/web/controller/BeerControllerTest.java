@@ -1,10 +1,7 @@
 package egecoskun121.msscbeerservice.web.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import egecoskun121.msscbeerservice.bootstrap.BeerLoader;
-import egecoskun121.msscbeerservice.domain.Beer;
-import egecoskun121.msscbeerservice.repositories.BeerRepository;
 import egecoskun121.msscbeerservice.services.BeerService;
 import egecoskun121.msscbeerservice.web.model.BeerDTO;
 import egecoskun121.msscbeerservice.web.model.BeerStyleEnum;
@@ -15,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.constraints.ConstraintDescriptions;
@@ -24,7 +20,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
