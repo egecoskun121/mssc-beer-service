@@ -13,6 +13,7 @@ import java.util.List;
 
 public class BeerPagedList extends PageImpl<BeerDTO> implements Serializable {
 
+    static final long serialVersionUID=124987129867L;
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public BeerPagedList(@JsonProperty("content") List<BeerDTO> content,
                          @JsonProperty("number") int number,

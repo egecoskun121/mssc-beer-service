@@ -7,6 +7,7 @@ import egecoskun121.msscbeerservice.web.mapper.BeerMapper;
 import egecoskun121.msscbeerservice.web.model.BeerDTO;
 import egecoskun121.msscbeerservice.web.model.BeerPagedList;
 import egecoskun121.msscbeerservice.web.model.BeerStyleEnum;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class BeerServiceImpl implements BeerService{
     }
 
     @Override
+    @Cacheable(cacheNames = "beerCache",key = "#beerId",condition = "#showInventoryOnHand==false")
     public BeerDTO getById(UUID beerId,Boolean showInventoryOnHand) {
         if(showInventoryOnHand){
             return beerMapper.beerToBeerDTOWithInventory(beerRepository.findById(beerId).orElseThrow(NotFoundException::new));
@@ -43,6 +45,12 @@ public class BeerServiceImpl implements BeerService{
     }
 
     @Override
+    @Cacheable(cacheNames="beerUpcCache")
+    public BeerDTO getBeerByUpc(String upc) {
+        return beerMapper.beerToBeerDTO(beerRepository.findBeerByUpc(upc));
+    }
+
+    @Override
     public BeerDTO updateBeerById(UUID beerId, BeerDTO beerDTO) {
         Beer beer = beerRepository.findById(beerId).orElseThrow(NotFoundException::new);
         beer.setBeerName(beerDTO.getBeerName());
@@ -54,6 +62,7 @@ public class BeerServiceImpl implements BeerService{
     }
 
     @Override
+    @Cacheable(cacheNames = "beerListCache",condition = "#showInventoryOnHand==false")
     public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest, Boolean showInventoryOnHand) {
 
         BeerPagedList beerPagedList;

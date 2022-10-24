@@ -1,5 +1,6 @@
 package egecoskun121.msscbeerservice.services;
 
+import egecoskun121.msscbeerservice.domain.Beer;
 import egecoskun121.msscbeerservice.web.model.BeerDTO;
 import egecoskun121.msscbeerservice.web.model.BeerPagedList;
 import egecoskun121.msscbeerservice.web.model.BeerStyleEnum;
@@ -11,6 +12,8 @@ public interface BeerService {
     BeerDTO getById(UUID beerId,Boolean showInventoryOnHand);
 
     BeerDTO saveNewBeer(BeerDTO beerDTO);
+
+    BeerDTO getBeerByUpc(String upc);
 
     BeerDTO updateBeerById(UUID beerId, BeerDTO beerDTO);
 
